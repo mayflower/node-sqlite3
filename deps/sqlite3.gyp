@@ -67,23 +67,31 @@
     {
       'target_name': 'sqlite3',
       'type': 'static_library',
-      'include_dirs': [ '<(SHARED_INTERMEDIATE_DIR)/sqlite-autoconf-<@(sqlite_version)/' ],
+      'include_dirs': [
+        '<(SHARED_INTERMEDIATE_DIR)/sqlite-autoconf-<@(sqlite_version)/',
+        './sqlite-reverse-string/'
+      ],
       'dependencies': [
         'action_before_build'
       ],
       'cflags': [ '-include ../src/gcc-preinclude.h' ],
       'sources': [
-        '<(SHARED_INTERMEDIATE_DIR)/sqlite-autoconf-<@(sqlite_version)/sqlite3.c'
+        '<(SHARED_INTERMEDIATE_DIR)/sqlite-autoconf-<@(sqlite_version)/sqlite3.c',
+        './sqlite-reverse-string/sqlite_reverse_string.c'
       ],
       'direct_dependent_settings': {
-        'include_dirs': [ '<(SHARED_INTERMEDIATE_DIR)/sqlite-autoconf-<@(sqlite_version)/' ],
+        'include_dirs': [
+          '<(SHARED_INTERMEDIATE_DIR)/sqlite-autoconf-<@(sqlite_version)/',
+          './sqlite-reverse-string/'
+        ],
         'defines': [
           'SQLITE_THREADSAFE=1',
-          'SQLITE_ENABLE_FTS3',
-          'SQLITE_ENABLE_FTS4',
-          'SQLITE_ENABLE_FTS5',
           'SQLITE_ENABLE_JSON1',
-          'SQLITE_ENABLE_RTREE'
+          'SQLITE_ENABLE_RTREE',
+          'SQLITE_USE_URI',
+          'SQLITE_ENABLE_FTS5',
+          'SQLITE_ENABLE_COLUMN_METADATA',
+          'SQLITE_CORE'
         ],
       },
       'cflags_cc': [
@@ -93,11 +101,12 @@
       'defines': [
         '_REENTRANT=1',
         'SQLITE_THREADSAFE=1',
-        'SQLITE_ENABLE_FTS3',
-        'SQLITE_ENABLE_FTS4',
-        'SQLITE_ENABLE_FTS5',
         'SQLITE_ENABLE_JSON1',
-        'SQLITE_ENABLE_RTREE'
+        'SQLITE_ENABLE_RTREE',
+        'SQLITE_USE_URI',
+        'SQLITE_ENABLE_FTS5',
+        'SQLITE_ENABLE_COLUMN_METADATA',
+        'SQLITE_CORE'
       ],
       'export_dependent_settings': [
         'action_before_build',

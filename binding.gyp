@@ -35,7 +35,8 @@
       "sources": [
         "src/database.cc",
         "src/node_sqlite3.cc",
-        "src/statement.cc"
+        "src/statement.cc",
+        "src/extension_trampoline.cc"
       ]
     },
     {
